@@ -13,3 +13,4 @@
 * Maxime Chambreuil <mchambreuil@ursainfosystems.com>
 * Javi Dios <javi@ozonomultimedia.com> (Odoo v11 port)
 * Simone Vanin <simone.vanin@agilebg.com>
+* Luis Felipe Miléo <mileo@kmee.com.br> (Odoo v16 port)

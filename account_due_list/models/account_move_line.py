@@ -32,9 +32,7 @@ class AccountMoveLine(models.Model):
     )
 
     @api.model
-    def fields_view_get(
-        self, view_id=None, view_type="form", toolbar=False, submenu=False
-    ):
+    def get_view(self, view_id=None, view_type="form", **options):
         model_data_obj = self.env["ir.model.data"].sudo()
         ids = model_data_obj.search(
             [("module", "=", "account_due_list"), ("name", "=", "view_payments_tree")]
@@ -45,13 +43,9 @@ class AccountMoveLine(models.Model):
             )
         if ids and view_id == view_payments_tree_id:
             # Use due list
-            result = super(models.Model, self).fields_view_get(
-                view_id, view_type, toolbar=toolbar, submenu=submenu
-            )
+            result = super(models.Model, self).get_view(view_id, view_type, **options)
         else:
             # Use special views for account.move.line object
             # (for ex. tree view contains user defined fields)
-            result = super(AccountMoveLine, self).fields_view_get(
-                view_id, view_type, toolbar=toolbar, submenu=submenu
-            )
+            result = super().get_view(view_id, view_type, **options)
         return result
