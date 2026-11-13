@@ -36,6 +36,12 @@ msgid "Paid Amount:"
 msgstr "Montante Pago:"
 
 #. module: account_payment_widget_amount
+#. odoo-javascript
+#: code:addons/account_payment_widget_amount/static/src/js/account_payment_field.esm.js:0
+msgid "Enter the payment amount"
+msgstr "Informe o valor do pagamento"
+
+#. module: account_payment_widget_amount
 #: code:addons/account_payment_widget_amount/models/account_move_line.py:25
 #, python-format
 msgid "The specified amount has to be strictly positive"
