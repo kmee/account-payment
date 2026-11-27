@@ -19,8 +19,10 @@
             position="replace"
         >
             <i class="o_field_widget text-start o_payment_label">
-                <t t-esc="line.returned and 'Returned on ' or 'Paid on '" />
-                <t t-esc="line.date" />
+                <t t-if="line.returned">Returned on </t>
+                <t t-elif="line.is_refund">Reversed on </t>
+                <t t-else="">Paid on </t>
+                <t t-out="line.formattedDate" />
             </i>
         </xpath>
     </t>
