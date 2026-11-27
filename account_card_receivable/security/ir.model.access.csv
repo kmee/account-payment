@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_card_acquirer_invoice,account.card.acquirer invoicing,model_account_card_acquirer,account.group_account_invoice,1,0,0,0
+access_account_card_acquirer_manager,account.card.acquirer manager,model_account_card_acquirer,account.group_account_manager,1,1,1,1
+access_account_card_acquirer_rule_invoice,account.card.acquirer.rule invoicing,model_account_card_acquirer_rule,account.group_account_invoice,1,0,0,0
+access_account_card_acquirer_rule_manager,account.card.acquirer.rule manager,model_account_card_acquirer_rule,account.group_account_manager,1,1,1,1
+access_account_card_statement_user,account.card.statement accountant,model_account_card_statement,account.group_account_user,1,1,1,1
+access_account_card_statement_line_user,account.card.statement.line accountant,model_account_card_statement_line,account.group_account_user,1,1,1,1

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <menuitem
+        id="menu_account_card_receivable"
+        name="Card Receivables"
+        parent="account.menu_finance_receivables"
+        action="action_account_card_receivable"
+        sequence="60"
+    />
+    <menuitem
+        id="menu_account_card_statement"
+        name="Acquirer Statements"
+        parent="account.menu_finance_receivables"
+        action="action_account_card_statement"
+        groups="account.group_account_user"
+        sequence="61"
+    />
+    <menuitem
+        id="menu_account_card_acquirer"
+        name="Card Acquirers"
+        parent="account.root_payment_menu"
+        action="action_account_card_acquirer"
+        sequence="31"
+    />
+</odoo>

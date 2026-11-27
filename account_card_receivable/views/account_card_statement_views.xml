@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_card_statement_form" model="ir.ui.view">
+        <field name="name">account.card.statement.form</field>
+        <field name="model">account.card.statement</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_import_file"
+                        string="Import File"
+                        type="object"
+                        invisible="state == 'done' or not data_file"
+                    />
+                    <button
+                        name="action_match"
+                        string="Match"
+                        type="object"
+                        invisible="state == 'done'"
+                    />
+                    <button
+                        name="action_reconcile"
+                        string="Reconcile"
+                        type="object"
+                        class="oe_highlight"
+                        invisible="state == 'done'"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" /></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="acquirer_id" readonly="line_ids" />
+                            <field name="date" />
+                            <field name="filename" invisible="1" />
+                            <field name="data_file" filename="filename" />
+                            <field name="ignored_lines" invisible="not ignored_lines" />
+                        </group>
+                        <group>
+                            <field name="amount_gross" />
+                            <field name="amount_fee" />
+                            <field name="amount_net" />
+                            <field
+                                name="unexplained_count"
+                                decoration-danger="unexplained_count"
+                            />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Lines" name="lines">
+                            <field name="line_ids" readonly="state == 'done'">
+                                <list
+                                    editable="bottom"
+                                    decoration-success="state == 'reconciled'"
+                                    decoration-danger="state in ('amount_divergent', 'not_found', 'ambiguous', 'invalid')"
+                                >
+                                    <field name="line_type" />
+                                    <field name="payment_date" />
+                                    <field name="sale_date" optional="show" />
+                                    <field name="reference" />
+                                    <field name="authorization" optional="hide" />
+                                    <field name="brand" optional="hide" />
+                                    <field name="installment" />
+                                    <field name="installment_count" />
+                                    <field name="gross_amount" sum="Gross" />
+                                    <field name="fee_amount" sum="Fees" />
+                                    <field name="anticipation_fee_amount" optional="hide" />
+                                    <field name="net_amount" sum="Net" />
+                                    <field name="fee_difference" optional="show" />
+                                    <field name="description" optional="hide" />
+                                    <field name="state" />
+                                    <field name="note" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Entries" name="entries" invisible="not move_ids">
+                            <field name="move_ids" readonly="1" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="account_card_statement_list" model="ir.ui.view">
+        <field name="name">account.card.statement.list</field>
+        <field name="model">account.card.statement</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="acquirer_id" />
+                <field name="date" />
+                <field name="amount_gross" />
+                <field name="amount_fee" />
+                <field name="amount_net" />
+                <field name="unexplained_count" />
+                <field name="state" />
+            </list>
+        </field>
+    </record>
+
+    <record id="action_account_card_statement" model="ir.actions.act_window">
+        <field name="name">Acquirer Statements</field>
+        <field name="res_model">account.card.statement</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

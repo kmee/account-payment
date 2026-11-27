@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_journal_form" model="ir.ui.view">
+        <field name="name">account.journal.form - account_card_receivable</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account_payment_installment.view_account_journal_form" />
+        <field name="arch" type="xml">
+            <field name="installment_plan_ids" position="before">
+                <group>
+                    <field name="card_acquirer_id" />
+                    <field name="card_modality" invisible="not card_acquirer_id" />
+                </group>
+            </field>
+        </field>
+    </record>
+</odoo>
