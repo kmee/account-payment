@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <template id="method_form" inherit_id="payment.method_form">
+        <xpath
+            expr="//div[@name='o_payment_inline_form']/div[hasclass('d-flex')]"
+            position="before"
+        >
+            <t
+                t-set="installment_options"
+                t-value="mode == 'payment' and provider_sudo._get_installment_options(pm_sudo, amount, currency) or []"
+            />
+            <div
+                t-if="installment_options"
+                name="o_payment_installment_container"
+                class="mb-2"
+            >
+                <label
+                    class="form-label small text-600"
+                    t-attf-for="o_payment_installments_{{provider_sudo.id}}_{{pm_sudo.id}}"
+                >Installments</label>
+                <select
+                    name="o_payment_installments"
+                    class="form-select"
+                    t-attf-id="o_payment_installments_{{provider_sudo.id}}_{{pm_sudo.id}}"
+                >
+                    <option
+                        t-foreach="installment_options"
+                        t-as="installment_option"
+                        t-att-value="installment_option['installments']"
+                        t-out="installment_option['label']"
+                    />
+                </select>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="confirm" inherit_id="payment.confirm">
+        <xpath expr="//t[@t-call='payment.summary_item'][1]/.." position="after">
+            <p
+                t-if="tx.installments &gt; 1"
+                name="o_payment_installment_summary"
+                class="text-600"
+            >
+                Paid in <t t-out="tx.installments" /> installments of
+                <span
+                t-field="tx.installment_amount"
+                t-options="{'widget': 'monetary', 'display_currency': tx.currency_id}"
+            /><t t-if="tx.installment_interest_bearer == 'customer'">
+                    (total
+                    <span
+                t-field="tx.amount_charged"
+                t-options="{'widget': 'monetary', 'display_currency': tx.currency_id}"
+            />)</t><t t-else="">, interest-free</t>.
+            </p>
+        </xpath>
+    </template>
+</odoo>

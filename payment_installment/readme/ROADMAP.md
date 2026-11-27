@@ -1,0 +1,3 @@
+- The interest is not posted to the accounts.
+- A saved card (token) is always charged in a single installment.
+- The plan is the same for every card brand.

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="payment_installment_plan_form" model="ir.ui.view">
+        <field name="name">payment.installment.plan.form</field>
+        <field name="model">payment.installment.plan</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <field name="active" invisible="1" />
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group name="applicability">
+                            <field name="provider_ids" widget="many2many_tags" />
+                            <field name="payment_method_ids" widget="many2many_tags" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                        <group name="limits">
+                            <field name="currency_id" />
+                            <field name="min_installment_amount" />
+                            <field name="max_installments" />
+                        </group>
+                    </group>
+                    <field name="line_ids">
+                        <list editable="bottom">
+                            <field name="installments" />
+                            <field name="interest_percent" />
+                            <field
+                                name="interest_bearer"
+                                invisible="not interest_percent"
+                            />
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="payment_installment_plan_list" model="ir.ui.view">
+        <field name="name">payment.installment.plan.list</field>
+        <field name="model">payment.installment.plan</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="provider_ids" widget="many2many_tags" />
+                <field name="payment_method_ids" widget="many2many_tags" />
+                <field name="max_installments" />
+                <field
+                    name="company_id"
+                    groups="base.group_multi_company"
+                    optional="show"
+                />
+            </list>
+        </field>
+    </record>
+</odoo>

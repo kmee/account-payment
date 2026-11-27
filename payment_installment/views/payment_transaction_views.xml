@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="payment_transaction_form" model="ir.ui.view">
+        <field name="name">payment.transaction.form - payment_installment</field>
+        <field name="model">payment.transaction</field>
+        <field name="inherit_id" ref="payment.payment_transaction_form" />
+        <field name="arch" type="xml">
+            <field name="provider_reference" position="after">
+                <field name="installments" />
+                <field name="installment_amount" invisible="installments == 1" />
+                <field
+                    name="installment_interest_amount"
+                    invisible="not installment_interest_amount"
+                />
+                <field
+                    name="installment_interest_bearer"
+                    invisible="not installment_interest_amount"
+                />
+                <field
+                    name="amount_charged"
+                    invisible="installment_interest_bearer != 'customer'"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="payment_transaction_list" model="ir.ui.view">
+        <field name="name">payment.transaction.list - payment_installment</field>
+        <field name="model">payment.transaction</field>
+        <field name="inherit_id" ref="payment.payment_transaction_list" />
+        <field name="arch" type="xml">
+            <field name="amount" position="after">
+                <field name="installments" optional="hide" />
+            </field>
+        </field>
+    </record>
+</odoo>
