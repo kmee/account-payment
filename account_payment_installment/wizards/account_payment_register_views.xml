@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_payment_register_form" model="ir.ui.view">
+        <field name="name">account.payment.register.form - account_payment_installment</field>
+        <field name="model">account.payment.register</field>
+        <field name="inherit_id" ref="account.view_account_payment_register_form" />
+        <field name="arch" type="xml">
+            <field name="payment_date" position="before">
+                <field name="installment_plan_id" invisible="1" />
+                <field
+                    name="installment_plan_line_id"
+                    invisible="not installment_plan_id"
+                    options="{'no_create': True, 'no_open': True}"
+                    placeholder="1x"
+                />
+                <field
+                    name="acquirer_reference"
+                    invisible="not installment_plan_id"
+                />
+                <field
+                    name="authorization_code"
+                    invisible="not installment_plan_id"
+                />
+                <field
+                    name="card_brand_id"
+                    invisible="not installment_plan_id"
+                    options="{'no_create': True, 'no_open': True}"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>

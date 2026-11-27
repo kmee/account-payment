@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_payment_form" model="ir.ui.view">
+        <field name="name">account.payment.form - account_payment_installment</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form" />
+        <field name="arch" type="xml">
+            <field name="memo" position="after">
+                <field name="installments" readonly="state != 'draft'" />
+                <field name="installment_amount" invisible="installments == 1" />
+                <field
+                    name="installment_interest_amount"
+                    invisible="not installment_interest_amount"
+                />
+                <field
+                    name="installment_interest_bearer"
+                    invisible="not installment_interest_amount"
+                />
+                <field
+                    name="installment_interest_charged_by"
+                    invisible="installment_interest_bearer != 'customer'"
+                />
+                <field
+                    name="amount_charged"
+                    invisible="installment_interest_charged_by != 'provider'"
+                />
+                <field name="acquirer_reference" readonly="state != 'draft'" />
+                <field name="authorization_code" readonly="state != 'draft'" />
+                <field name="card_brand_id" readonly="state != 'draft'" />
+            </field>
+        </field>
+    </record>
+</odoo>

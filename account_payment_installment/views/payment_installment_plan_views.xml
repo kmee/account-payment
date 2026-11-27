@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="payment_installment_plan_form" model="ir.ui.view">
+        <field name="name">payment.installment.plan.form - account_payment_installment</field>
+        <field name="model">payment.installment.plan</field>
+        <field name="inherit_id" ref="payment_installment.payment_installment_plan_form" />
+        <field name="arch" type="xml">
+            <field name="provider_ids" position="after">
+                <field name="journal_ids" widget="many2many_tags" />
+            </field>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_payment_installment_plan"
+        name="Installment Plans"
+        parent="account.root_payment_menu"
+        action="payment_installment.action_payment_installment_plan"
+        sequence="30"
+    />
+</odoo>

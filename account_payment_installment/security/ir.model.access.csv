@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_payment_installment_plan_invoice,payment.installment.plan invoicing,payment_installment.model_payment_installment_plan,account.group_account_invoice,1,0,0,0
+access_payment_installment_plan_line_invoice,payment.installment.plan.line invoicing,payment_installment.model_payment_installment_plan_line,account.group_account_invoice,1,0,0,0
+access_payment_installment_plan_manager,payment.installment.plan accounting manager,payment_installment.model_payment_installment_plan,account.group_account_manager,1,1,1,1
+access_payment_installment_plan_line_manager,payment.installment.plan.line accounting manager,payment_installment.model_payment_installment_plan_line,account.group_account_manager,1,1,1,1
