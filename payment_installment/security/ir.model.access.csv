@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_payment_installment_plan_system,payment.installment.plan system,model_payment_installment_plan,base.group_system,1,1,1,1
+access_payment_installment_plan_line_system,payment.installment.plan.line system,model_payment_installment_plan_line,base.group_system,1,1,1,1

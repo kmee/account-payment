@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="payment_transaction_form" model="ir.ui.view">
+        <field name="name">payment.transaction.form - payment_installment</field>
+        <field name="model">payment.transaction</field>
+        <field name="inherit_id" ref="payment.payment_transaction_form" />
+        <field name="arch" type="xml">
+            <field name="provider_reference" position="after">
+                <field name="acquirer_reference" invisible="not acquirer_reference" />
+                <field name="authorization_code" invisible="not authorization_code" />
+                <field name="card_brand_id" invisible="not card_brand_id" />
+                <field name="installments" />
+                <field name="installment_amount" invisible="installments == 1" />
+                <field
+                    name="installment_interest_amount"
+                    invisible="not installment_interest_amount"
+                />
+                <field
+                    name="installment_interest_bearer"
+                    invisible="not installment_interest_amount"
+                />
+                <field
+                    name="installment_interest_charged_by"
+                    invisible="installment_interest_bearer != 'customer'"
+                />
+                <field
+                    name="amount_charged"
+                    invisible="installment_interest_charged_by != 'provider'"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="payment_transaction_list" model="ir.ui.view">
+        <field name="name">payment.transaction.list - payment_installment</field>
+        <field name="model">payment.transaction</field>
+        <field name="inherit_id" ref="payment.payment_transaction_list" />
+        <field name="arch" type="xml">
+            <field name="amount" position="after">
+                <field name="installments" optional="hide" />
+            </field>
+        </field>
+    </record>
+</odoo>
